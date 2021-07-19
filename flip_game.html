@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js">
+    </script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-image: url(https://scontent.ftpe4-1.fna.fbcdn.net/v/t1.18169-0/p526x296/21751699_1666018860097329_1147432509306499794_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=730e14&_nc_ohc=HlneQO3UQ6YAX-hNMLo&_nc_ht=scontent.ftpe4-1.fna&oh=b21dc3d487bb9b882453ad1757b3f4bb&oe=60F8E0BE);
+        background-repeat: repeat;
+
+    }
+
+    #herosection {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .card {
+        width: 100px;
+        height: 100px;
+        padding: 5px;
+        color: white;
+        display: flex;
+        flex-wrap: wrap;
+
+
+
+    }
+
+    .front {
+        background: url(https://img.sj33.cn/uploads/allimg/201102/20110221101357333.png), white;
+        background-size: 97%;
+        box-shadow: 5px 5px 5px lightgray;
+        border-radius: 10%;
+        margin: 0px auto;
+        text-align: center;
+        padding: 5px;
+        width: 120px;
+        height: 120px;
+
+    }
+
+    h1 {
+        color: rgb(255, 109, 109);
+        animation: bounce;
+        animation: 3s infinite;
+        text-shadow: rgb(253, 204, 204) 10px 10px 10px;
+    }
+
+    input {
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    #btn_request {
+        background-color: rgb(255, 237, 237);
+        color: rgb(255, 109, 109);
+        border: 1px solid white;
+        box-shadow: 0px 5px 10px white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    #btn_request:hover {
+        box-shadow: 0px 5px 10px rgb(241, 175, 175);
+    }
+
+    .back {
+
+        border-radius: 10%;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        width: 120px;
+        height: 120px;
+    }
+
+    .aa {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .card_container {
+        box-shadow: 10px 10px 10px rgb(104, 103, 103);
+        width: 550px;
+        padding-bottom: 20px;
+        border: 1px solid white;
+        border-radius: 10px;
+        background-color: rgba(255, 182, 193, 0.715);
+        margin: 0px auto;
+        display: none;
+        flex-wrap: wrap;
+
+
+    }
+
+    #left1 {
+        display: none;
+
+
+    }
+
+    #right1 {
+        background-color: rgba(173, 216, 230, 0.708);
+        margin-left: 50px;
+
+    }
+</style>
+<script>
+    $(function ($) {
+        $('.card_container').find(".card").flip({ trigger: 'hover' });
+    });
+</script>
+
+<body>
+    <div id="herosection">
+
+        <h1 class="animate__shakeX">要玩遊戲嗎？</h1>
+        <input type="text" id="url" placeholder="請輸入LINE 貼圖url" style="width: 250px;"
+            value="https://store.line.me/stickershop/product/23733/zh-Hant"><br>
+        <button id="btn_request">取得LINE 貼圖</button>
+        <div class="aa">
+            <div class="card_container" id="left1">
+            </div>
+            <div class="card_container" id="right1">
+            </div>
+        </div>
+        <!-- <div class="card">
+            <div class="front">
+                卡片正面内容
+            </div>
+            <div class="back">
+                 卡片反面内容
+        </div> -->
+    </div>
+    </div>
+    <script>
+        var checkurl = '';
+
+
+        let count = 0;
+
+
+
+        document.querySelector('button#btn_request').addEventListener('click', function () {
+            let url = document.querySelector('input#url').value;
+            if (url == '') {
+                alert('請輸入網站');
+
+            }
+            let xhr = new XMLHttpRequest();
+            xhr.open('get', 'http://darreninfo.cc:5003/linesticker?url=' + url)
+            xhr.send();
+
+            xhr.onloadend = function () {
+                console.log('結束');
+            }
+
+            xhr.onload = function () {
+                console.log('完成');
+
+                let obj = JSON.parse(this.responseText);
+                obj['results'].length = 12;
+
+                let newObj = obj['results'].map(n => n['staticUrl']);
+                newObj.sort(() => Math.random() - 0.5);
+
+                if (obj['success']) {
+
+                    let left_str = '';
+                    for (let o of obj['results']) {
+                        left_str += '<div class="card" style="margin:10px;border-radius:10px; cursor: pointer">\
+                                <div class="front" ></div>\
+                                <div class="back"><img src="'+ o['staticUrl'] + '" style="width:120px;height:120px;border-radius:10px" ></div>\
+                        </div>';
+                        $('#left1').html(left_str);
+                    }
+
+                    let right_str = "";
+                    for (let o of newObj) {
+                        right_str += '<div class="card" style="margin:10px;border-radius:10px">\
+                                        <div class="front" ></div>\
+                                        <div class="back">\
+                                            <img src="'+ o + '" style = "width:120px;height:120px;border-radius:10px" >\
+                                        </div>\
+                                    </div>';
+                        $('#right1').html(right_str);
+                    }
+                    $('.card_container').css('display', 'flex').hide();
+                    $('.card_container').fadeIn('slow');
+
+                    $('.card_container').find(".card").flip();
+
+
+                    $('.card').click(function () {
+                        $(this).flip(true);
+
+
+                        $(this).on('flip:done', function () {
+                            console.log('check:', checkurl);
+                            console.log('my:', $(this).find('img').attr('src'));
+                            if (checkurl == '') {
+                                checkurl = $(this).find('img').attr('src');
+                            } else {
+                                if ($(this).find('img').attr('src') == checkurl) {
+                                    count = count + 1;
+                                    alert('恭喜獲得：' + count + '分');
+                                    $(`img[src="${checkurl}"]`).parents('.card').css('visibility', 'hidden');
+                                } else {
+                                    $(".card").flip(false);
+                                }
+                                checkurl = '';
+                            }
+                            $(this).off("flip:done");
+                        });
+
+                    });
+                }
+
+                // '<img src="'+ checkurl +'">'  
+                // `<img src="${checkurl}">`
+            }
+        });
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

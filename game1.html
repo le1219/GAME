@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/flip.js"></script>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-image: url(lf-franciz-wIZpOCdTb8I-unsplash.jpg);
+        background-position: 20% 50%;
+        background-repeat: no-repeat;
+
+    }
+
+    #herosection {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .card {
+        width: 150px;
+        height: 150px;
+        padding: 5px;
+        color: white;
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 50px 20px;
+
+
+    }
+
+    .front {
+        background-color: white;
+        background: url(data:image/jpeg;base64,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);
+        box-shadow: 5px 5px 5px lightgray;
+        background-position: center;
+        border-radius: 10%;
+        margin: 0px auto;
+        text-align: center;
+        padding: 5px;
+
+    }
+
+    h1 {
+        color: white;
+    }
+
+    input {
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    #btn_request {
+        background-color: black;
+        color: white;
+        border: 1px solid white;
+        box-shadow: 0px 5px 10px white;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    #btn_request:hover {
+        box-shadow: 0px 5px 10px rgb(241, 175, 175);
+    }
+
+    .back {
+        font-size: 26px;
+        color: lightgreen;
+        background: rgb(253, 253, 187);
+        border-radius: 10%;
+        display: flex;
+        text-align: center;
+        align-items: center;
+    }
+
+    #card_container {
+        width: 90%;
+        margin: 0px auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>
+<script>
+    $(function ($) {
+        $('#card_container').find(".card").flip({ trigger: 'hover' });
+    });
+</script>
+
+<body>
+    <div id="herosection">
+        <h1>Do you want to learn Cantonese?</h1>
+        <input type="text" id="url" placeholder="請輸入LINE 貼圖url" style="width: 250px;"><br>
+        <button id="btn_request">取得LINE 貼圖</button>
+        <div id="card_container">
+
+        </div>
+        <!-- <div class="card">
+            <div class="front">
+                卡片正面内容
+            </div>
+            <div class="back">
+                 卡片反面内容
+        </div> -->
+    </div>
+    </div>
+    <script>
+        document.querySelector('button#btn_request').addEventListener('click', function () {
+            let url = document.querySelector('input#url').value;
+            if (url == '') {
+                alert('請輸入網站');
+
+            }
+            let xhr = new XMLHttpRequest();
+            xhr.open('get', 'http://darreninfo.cc:5003/linesticker?url=' + url)
+            xhr.send();
+
+            xhr.onloadend = function () {
+                console.log('結束');
+            }
+
+            xhr.onload = function () {
+                console.log('完成');
+
+                let obj = JSON.parse(this.responseText);
+
+                let div = document.querySelector('div#card');
+
+                if (obj['success']) {
+                    consoel.log(document.getElementsByClassName('card_container'));
+                    for (let o of obj['results']) {
+                        let cardcontainer = document.getElementById('card_container');
+                        cardcontainer.innerHTML += '<div class="card" style="margin:10px;border-radius:10px">\
+                                <div class="front" >'+ `<img src="${o['staticUrl']}" style="width:150px;height:150px;border-radius:10px">` + '</div>\
+                        <div class="back">' + translte(o['id']) + '</div>\
+                                </div > ';
+
+
+
+                        // let div2 = document.createElement('div');
+                        // div2.style = `width:120px;height:120px;border-radius:20%;background-color:lightgrey;margin:10px;float:left;display:flex;justify-content:center;
+                        // text-align:center;
+                        // `
+
+                        // div2.setAttribute('class', 'aa');
+
+                        // let img = document.createElement('img');
+
+                        // img.src = o['staticUrl']
+                        // 
+                        // img.id = o['id']
+                        // console.log(img.id = o['id'])
+
+                        // div2.appendChild(img);
+                        // div.appendChild(div2);
+                    }
+                    $('#card_container').find(".card").flip({ trigger: 'hover' });
+
+                }
+            }
+        }
+        )
+
+
+        function translte(id) {
+
+            switch (id) {
+                case "40100646":
+                    return '耍帥 OS：chok到爆阿';
+                    break;
+                case "40100647":
+                    return '厚吐司嗎？<br>正解：多管閒事';
+                    break;
+                case "40100648":
+                    return '正解：為什麼阿？';
+                    break;
+                case "40100649":
+                    return '正解：講這些幹嘛啊';
+                    break;
+                case "40100650":
+                    return '正解：吃好的';
+                    break;
+                case "40100651":
+                    return '正解：是這樣的';
+                    break;
+                case "40100652":
+                    return '正解：(Disqualify)<br> OS：唉.議員都被DQ了';
+                    break;
+                case "40100653":
+                    return 'OS：真的別放棄自己阿';
+                    break;
+                case "40100654":
+                    return 'OS：就突破啦';
+                    break;
+                case "40100655":
+                    return 'OS：我也同意';
+                    break;
+                case "40100656":
+                    return '正解：My favorite';
+                    break;
+                case "40100657":
+                    return '正解：事情大條了';
+                    break;
+                case "40100658":
+                    return '正解：爛哏 聽到都發抖';
+                    break;
+                case "40100659":
+                    return '正解：無所事事到爆炸';
+                    break;
+                case "40100660":
+                    return 'OS：一定是你啊';
+                    break;
+                case "40100661":
+                    return '正解：臨陣脫逃<br>傳說中的神獸之一';
+                    break;
+
+                case "40100662":
+                    return '正解：炫耀<br> OS：把名拿出來炫耀';
+                    break;
+                case "40100663":
+                    return '正解：嘴巴是圓的 無奈';
+                    break;
+                case "40100664":
+                    return '正解：好可愛';
+                    break;
+                case "40100665":
+                    return 'OS：就仙 哪有那麼多仙女';
+                    break;
+                case "40100666":
+                    return '正解：SUPPOT';
+                    break;
+                case "40100667":
+                    return '正解：下潛太深人不見了';
+                    break;
+
+                case "40100668":
+                    return '正解：沒有任何理由能輸阿';
+                    break;
+                case "40100669":
+                    return '正解：在空中太久 不會下來';
+                    break;
+                case "40100670":
+                    return '正解：好人卡';
+                    break;
+                case "40100671":
+                    return '正解：GG 事情大條';
+                    break;
+                case "40100672":
+                    return '正解：投降了QQ';
+                    break;
+                case "40100673":
+                    return '正解：有圖片才能認證';
+                    break;
+                case "40100674":
+                    return '正解：大陸來的';
+                    break;
+                case "40100675":
+                    return 'OS：只有帥哥能做這動作';
+                    break;
+                case "40100676":
+                    return '正解：老師我真的姓賴';
+                    break;
+                case "40100677":
+                    return '正解：中招也可説中伏';
+                    break;
+                case "40100678":
+                    return '正解：丟臉死了';
+                    break;
+                case "40100679":
+                    return '正解：吃爆米花看戲';
+                    break;
+                case "40100680":
+                    return '正解：OK的啦';
+                    break;
+                case "40100681":
+                    return '正解：一定是這樣除非不是';
+                    break;
+                case "40100682":
+                    return '正解：妹子騙讚';
+                    break;
+                case "40100683":
+                    return '正解：給你個讚';
+                    break;
+                case "40100684":
+                    return '正解：想怎樣';
+                    break;
+                case "40100685":
+                    return '正解：好怕怕';
+                    break;
+
+
+
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>
