@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>append()</title>
+    <script src="https://kit.fontawesome.com/86a4513501.js" crossorigin="anonymous"></script>
+    <style>
+        table,
+        tbody,
+        th,
+        td {
+            border: 1px solid lightblue;
+        }
+
+        th {
+            width: 300px;
+        }
+
+        td {
+            height: 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <button id="minus"><i class="far fa-minus-square"></i></button>
+    <button id="plus"><i class="far fa-plus-square"></i></button>
+    <table>
+        <tbody>
+            <th>LEFT</th>
+            <th>RIGHT</th>
+            <tr>
+                <td>ADDDDDDD</td>
+                <td>EEEEEEEE</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#plus').click(function () {
+
+            $('tbody').append("<tr> <td></td> <td></td> </tr>");
+        })
+        $('#minus').click(function () {
+
+            $('tbody').find('tr').last().remove('tr');
+        })
+    </script>
+</body>
+
+</html>
