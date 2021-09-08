@@ -13,8 +13,14 @@
             border: 1px solid lightblue;
         }
 
-        th {
+        th,
+        input {
             width: 300px;
+            height: 30px;
+        }
+
+        input {
+            border: 0px;
         }
 
         td {
@@ -25,15 +31,19 @@
 </head>
 
 <body>
-    <button id="minus"><i class="far fa-minus-square"></i></button>
     <button id="plus"><i class="far fa-plus-square"></i></button>
     <table>
         <tbody>
-            <th>LEFT</th>
-            <th>RIGHT</th>
+
+            <th>數值一</th>
+            <th>數值二</th>
+            <th>計算</th>
+            <th>操作</th>
             <tr>
-                <td>ADDDDDDD</td>
-                <td>EEEEEEEE</td>
+                <td><input type="text" class="n_1"></td>
+                <td><input type="text" class="n_2"></td>
+                <td><input type="text" readonly class="result"></td>
+                <td><button class="minus"><i class="far fa-minus-square"></i></button></td>
             </tr>
         </tbody>
     </table>
@@ -42,12 +52,32 @@
     <script>
         $('#plus').click(function () {
 
-            $('tbody').append("<tr> <td></td> <td></td> </tr>");
+            $('tbody').append('<tr> <td></td> <td></td> <td></td> <td><button class="minus"><i class="far fa-minus-square"></i></button></td></tr>');
         })
-        $('#minus').click(function () {
-
+        $('.minus').click(function () {
             $('tbody').find('tr').last().remove('tr');
         })
+
+
+        $('.n_1').keyup(function () {
+            let aa = Number($(this).parents('tr').find('.n_1').val());
+            let bb = Number($(this).parents('tr').find('.n_2').val());
+            $(this).parents('tr').find('.result').val(aa + bb);
+        })
+
+
+
+        $('.n_2').keyup(function () {
+            let aa = Number($(this).parents('tr').find('.n_1').val());
+            let bb = Number($(this).parents('tr').find('.n_2').val());
+            $(this).parents('tr').find('.result').val(aa + bb);
+        });
+
+
+
+
+
+
     </script>
 </body>
 
