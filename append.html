@@ -47,32 +47,52 @@
             </tr>
         </tbody>
     </table>
+    <span>total:</span>
+    <p id="count"></p>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $('#plus').click(function () {
+            let appendIn = `'<tr> 
+                <td><input type="text" class="n_1"></td>
+                <td><input type="text" class="n_2"></td>
+                <td><input type="text" readonly class="result"></td> <td><button class="minus"><i class="far fa-minus-square"></i></button></td></tr>'`
 
-            $('tbody').append('<tr> <td></td> <td></td> <td></td> <td><button class="minus"><i class="far fa-minus-square"></i></button></td></tr>');
+            $('tbody').append(appendIn);
         })
-        $('.minus').click(function () {
+        $('tbody').on('click', '.minus', function () {
+            console.log('我真的被刪除了');
+            // $(this).remove('tr');
             $('tbody').find('tr').last().remove('tr');
         })
 
 
-        $('.n_1').keyup(function () {
+        $('tbody').on('keyup', '.n_1', function () {
             let aa = Number($(this).parents('tr').find('.n_1').val());
             let bb = Number($(this).parents('tr').find('.n_2').val());
             $(this).parents('tr').find('.result').val(aa + bb);
+            counter();
         })
 
 
 
-        $('.n_2').keyup(function () {
+        $('tbody').on('keyup', '.n_2', function () {
             let aa = Number($(this).parents('tr').find('.n_1').val());
             let bb = Number($(this).parents('tr').find('.n_2').val());
             $(this).parents('tr').find('.result').val(aa + bb);
+            counter();
         });
+        function counter() {
+            let counter = 0;
+            $('tbody').find('.result').each(function () {
+                counter += Number($(this).val());
+                $('#count').text(counter)
+                console.log(counter);
 
+            })
+
+
+        }
 
 
 

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>draggable</title>
+    <style>
+        img {
+            width: 150px;
+            height: 150px;
+            margin: 1rem;
+            border-radius: 10px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            width: 80%;
+            margin: 0px auto;
+            border: 10px dotted red;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <ul>
+    </ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            let arrPic = ['pic/1.jpeg', 'pic/2.jpeg', 'pic/3.jpeg', 'pic/4.jpeg', 'pic/5.png', 'pic/6.png', 'pic/7.png', 'pic/8.jpeg', 'pic/9.png', 'pic/10.png'];
+            let pic = "";
+            for (i = 0; i < arrPic.length; i++) {
+                pic = pic + `<li><img src="${arrPic[i]}"></li>`
+            }
+            $('ul').html(pic);
+
+            // $('ul').sortable({
+            //     revert: false,
+
+            // });
+            $("ul, li").disableSelection();
+            $('li').draggable({
+                containment: "ul"
+                // 不能超過ul
+                // connecttoSortable: 'li',
+                // helper: clone,
+                // revert: "invalid"
+            })
+
+        });
+
+
+    </script>
+</body>
+
+</html>

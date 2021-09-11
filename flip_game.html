@@ -178,8 +178,13 @@
                 let obj = JSON.parse(this.responseText);
                 obj['results'].length = 12;
 
-                let newObj = obj['results'].map(n => n['staticUrl']);
-                newObj.sort(() => Math.random() - 0.5);
+                // let newObj = obj['results'].map(n => n['staticUrl']);
+                let newObj = obj['results'].map(function (n) {
+                    return n['staticUrl'];
+                });
+
+                newObj.sort(() => Math.random() - 0.5
+                );
 
                 if (obj['success']) {
 

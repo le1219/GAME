@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .front {
+            width: 150px !important;
+            height: 200px !important;
+            background-color: rgb(227, 172, 100);
+        }
+
+        .back {
+            width: 150px !important;
+            height: 200px !important;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="card">
+        <div class="front">
+            Front content
+        </div>
+        <div class="back">
+            <img src="${finalarr[i]}">
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js">
+    </script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+    <script>
+        $("#card").flip({
+            trigger: 'hover',
+            axis: 'x',
+            reverse: true
+        });
+
+    </script>
+
+</body>
+
+</html>

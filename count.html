@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>append()</title>
+    <script src="https://kit.fontawesome.com/86a4513501.js" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <h1>0</h1>
+    <button>+1</button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('button').click(() => {
+            let count = Number($('h1').text());
+            count += 1;
+            $('h1').text(count);
+        })
+
+    </script>
+</body>
+
+</html>

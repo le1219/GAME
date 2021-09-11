@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .center {
+            width: 300px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .center img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .front {
+            width: 100px !important;
+            height: 100px !important;
+            background-color: aquamarine;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js">
+    </script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+    <script>
+        let arrPic = ['pic/1.jpeg', 'pic/2.jpeg', 'pic/3.jpeg', 'pic/4.jpeg'];
+
+        let newarr = arrPic.concat(arrPic);
+        let finalarr = [];
+
+        function a(arr) {
+            arr.sort(() => (Math.random() - 0.5) * 8);
+            return arr;
+        }
+        finalarr = a(newarr);
+
+        let str = '';
+        for (let i = 0; i < finalarr.length; i++) {
+            str = str + `
+            <div class="card">
+                <div class="front">
+                 </div>
+                <div class="back">
+                     <img src="${finalarr[i]}">
+                </div>
+            </div>`
+        }
+        $('.center').html(str)
+
+        $(".card").flip({
+            axis: 'x',
+            reverse: true
+        });
+
+        let checkSrc = "";
+
+        // $('.card').click(function () {
+        //     $(this).flip(true);
+        //     if (checkSrc == "") {
+        //         checkSrc = $(this).find('img').attr('src');
+        //     } else {
+        //         if ($(this).find('img').attr('src') == checkSrc) {
+        //             return;
+
+        //         } else {
+        //             $(this).flip(false);
+        //         }
+        //     }
+        // });
+
+        $(document).on('flip:done', '.card', function () {
+            if (checkSrc == "") {
+                checkSrc = $(this).find('img').attr('src');
+            } else {
+                if ($(this).find('img').attr('src') == checkSrc) {
+                    checkSrc = '';
+                    return;
+
+                } else {
+                    $(this).flip(false);
+                    $(`img[src="${checkSrc}"]`).parents('.card').flip(false);
+                }
+            }
+            $(this).off('flip:done');
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>
